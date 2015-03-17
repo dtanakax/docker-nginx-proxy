@@ -127,7 +127,7 @@ SSLを有効にするには以下の様に指定
 
 環境変数で設定不可能なNginxの設定を行いたい場合は、プロキシ全体またはVIRTUAL_HOST毎にカスタム設定ファイルを指定することができます。
 
-##### プロキシ全体設定
+#### プロキシ全体設定
 
 プロキシ全体に設定を指定するには、`.conf`拡張子のを持つファイルを/etc/nginx/conf.dの下に追加します。
 
@@ -143,7 +143,7 @@ RUNコマンドでファイルを作成、または`conf.d`にファイルをコ
 
     $ docker run -d -p 80:80 -p 443:443 -v /path/to/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-proxy
 
-##### VIRTUAL_HOST毎設定
+#### VIRTUAL_HOST毎設定
 
 VIRTUAL_HOST毎に設定するには、`/etc/nginx/vhost.d`の下に設定ファイルを追加します。ファイル名はVIRTUAL_HOST毎に指定されたVIRTUAL_HOST変数と同じ名前にして下さい。
 
