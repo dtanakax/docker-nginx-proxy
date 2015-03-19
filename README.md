@@ -71,7 +71,7 @@ git pull後に
 
 HTTPではなくHTTPSを使用してバックエンドに接続したい場合は、バックエンドのコンテナに`VIRTUAL_PROTO=https`を設定します。
 
-    $　docker run -e VIRTUAL_PROTO=https
+    $ docker run -e VIRTUAL_PROTO=https
 
 ### コンテナを分ける場合
 
@@ -159,6 +159,12 @@ VIRTUAL_HOST毎に設定するには、`/etc/nginx/vhost.d`の下に設定ファ
 
     $ { echo 'server_tokens off;'; echo 'client_max_body_size 100m;'; } > /path/to/vhost.d/www.example.com
     $ ln -s www.example.com /path/to/vhost.d/example.com
+
+### WebSockerサポート
+
+WebSockerコンテナをプロキシするには、以下のように環境変数`WEBSOCKETS=1`を設定します。
+
+    $ docker run -e VIRTUAL_HOST=foo.bar.com -e WEBSOCKETS=1  ...
 
 ### License
 
