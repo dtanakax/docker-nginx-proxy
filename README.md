@@ -8,7 +8,7 @@
 
 ### 説明
 
-nginx:1.7.10へ docker-gen を組み込み リバースプロキシサーバ として動作するコンテナです。
+リバースプロキシサーバ として動作するコンテナです。
 
 [Dockerについて](https://docs.docker.com/ "Dockerについて")  
 [Docker Command Reference](https://docs.docker.com/reference/commandline/cli/ "Docker Command Reference")  
