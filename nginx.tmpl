@@ -68,35 +68,6 @@ upstream {{ $host }} {
 {{ end }}
 }
 
-{{/* Support WebSockets */}}
-{{ range $index, $value := $containers }}
-server {
-	gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
-
-	server_name {{ $host }};
-	proxy_buffering off;
-	error_log /proc/self/fd/2;
-	access_log /proc/self/fd/1;
-	client_max_body_size 10m;
-
-	location / {
-		proxy_pass http://{{ $host }};
-		include /etc/nginx/proxy_params;
-
-		# HTTP 1.1 support
-		proxy_http_version 1.1;
-
-		{{/* Only add the websockets Upgrade headers if a WEBSOCKETS env var is set. */}}
-				{{ if $value.Env.WEBSOCKETS }}
-					proxy_set_header Upgrade $http_upgrade;
-					proxy_set_header Connection "upgrade";
-				{{ else }}
-					proxy_set_header Connection "";
-				{{ end }}
-	}
-{{ end }}
-}
-
 {{/* Get the VIRTUAL_PROTO defined by containers w/ the same vhost, falling back to "http" */}}
 {{ $proto := or (first (groupByKeys $containers "Env.VIRTUAL_PROTO")) "http" }}
 
