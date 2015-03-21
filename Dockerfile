@@ -2,7 +2,7 @@
 FROM nginx:1.7.10
 
 # File Author / Maintainer
-MAINTAINER tanaka@infocorpus.com
+MAINTAINER Daisuke Tanaka, tanaka@infocorpus.com
 
 # Environment Variable of Dockergen
 # DOCKER_GEN_OS linux darwin
