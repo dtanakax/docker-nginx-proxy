@@ -26,10 +26,10 @@ git pull後に
 
 起動  
 
-    $ docker run --name <name> -d
-                 -p 80:80
-                 -p 443:443
-                 -v /var/run/docker.sock:/tmp/docker.sock
+    $ docker run --name <name> -d \
+                 -p 80:80 \
+                 -p 443:443 \
+                 -v /var/run/docker.sock:/tmp/docker.sock \
                  -ti <tag>/nginx-proxy
 
 次にプロキシさせたい任意のコンテナを環境変数`VIRTUAL_HOST`を指定して実行
