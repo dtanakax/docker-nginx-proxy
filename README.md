@@ -4,15 +4,15 @@
 
 ### Base Docker Image
 
-[nginx:1.7.10](https://registry.hub.docker.com/_/nginx/ "nginx:1.7.10")
+[nginx:1.7.10](https://registry.hub.docker.com/_/nginx/)
 
 ### 説明
 
 リバースプロキシサーバ として動作するコンテナです。
 
-[Dockerについて](https://docs.docker.com/ "Dockerについて")  
-[Docker Command Reference](https://docs.docker.com/reference/commandline/cli/ "Docker Command Reference")  
-[docker-genについて](https://github.com/jwilder/docker-gen "(https://docs.docker.com/ "Dockerについて")
+[Dockerについて](https://docs.docker.com/)  
+[Docker Command Reference](https://docs.docker.com/reference/commandline/cli/)  
+[docker-genについて](https://github.com/jwilder/docker-gen)
 
 ### 使用方法
 
@@ -22,7 +22,7 @@ git pull後に
 
 イメージ作成
 
-    $ docker build -t <tag>/nginx-proxy .
+    $ docker build -t tanaka0323/nginx-proxy .
 
 起動  
 
@@ -30,7 +30,7 @@ git pull後に
                  -p 80:80 \
                  -p 443:443 \
                  -v /var/run/docker.sock:/tmp/docker.sock \
-                 -ti <tag>/nginx-proxy
+                 -ti tanaka0323/nginx-proxy
 
 次にプロキシさせたい任意のコンテナを環境変数`VIRTUAL_HOST`を指定して実行
 
