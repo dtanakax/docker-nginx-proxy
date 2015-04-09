@@ -100,7 +100,7 @@ SSLは、ワイルドカードや証明書の命名規則、または環境変�
 
 SSLを有効にするには以下の様に指定
 
-    $ docker run -d -p 80:80 -p 443:443 -v /path/to/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock <tag>/nginx-proxy
+    $ docker run -d -p 80:80 -p 443:443 -v /path/to/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock tanaka0323/nginx-proxy
 
 /path/to/certs の内容は、使用中の任意の仮想ホスト用の証明書と秘密鍵が含まれている必要があります。
 証明書と秘密鍵は、仮想ホストの中に.crtと.keyの拡張子を持ったファイル名であるべきです。
@@ -119,7 +119,7 @@ SSLを有効にするには以下の様に指定
 
 指定した環境変数`VIRTUAL_HOST`変数と同じ名前の `/etc/nginx/htpasswd/$VIRTUAL_HOST` ファイルを作成するとBASIC認証が有効になります。
 
-    $ docker run -d -p 80:80 -p 443:443 -v /path/to/htpasswd:/etc/nginx/htpasswd -v /path/to/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-proxy
+    $ docker run -d -p 80:80 -p 443:443 -v /path/to/htpasswd:/etc/nginx/htpasswd -v /path/to/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock tanaka0323/nginx-proxy
 
 詳しくは、[こちら](http://httpd.apache.org/docs/2.2/programs/htpasswd.html)を参考にして下さい。
 
@@ -141,7 +141,7 @@ RUNコマンドでファイルを作成、または`conf.d`にファイルをコ
 
 または`docker run`コマンドでカスタム構成コンテナイメージを作成しても可能です。
 
-    $ docker run -d -p 80:80 -p 443:443 -v /path/to/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro -v /var/run/docker.sock:/tmp/docker.sock jwilder/nginx-proxy
+    $ docker run -d -p 80:80 -p 443:443 -v /path/to/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro -v /var/run/docker.sock:/tmp/docker.sock tanaka0323/nginx-proxy
 
 #### VIRTUAL_HOST毎設定
 
