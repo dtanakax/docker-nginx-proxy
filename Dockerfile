@@ -1,5 +1,5 @@
 # Set the base image
-FROM nginx:1.7.10
+FROM nginx:1.7.11
 
 # File Author / Maintainer
 MAINTAINER Daisuke Tanaka, tanaka@infocorpus.com

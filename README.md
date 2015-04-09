@@ -1,10 +1,10 @@
-![nginx 1.7.10](https://img.shields.io/badge/nginx-1.7.10-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![nginx 1.7.11](https://img.shields.io/badge/nginx-1.7.11-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 # docker-nginx-proxy
 
 ### Base Docker Image
 
-[nginx:1.7.10](https://registry.hub.docker.com/_/nginx/)
+[nginx:1.7.11](https://registry.hub.docker.com/_/nginx/)
 
 ### 説明
 
