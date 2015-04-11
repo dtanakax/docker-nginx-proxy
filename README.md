@@ -1,12 +1,15 @@
 ![nginx 1.7.11](https://img.shields.io/badge/nginx-1.7.11-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-# docker-nginx-proxy
+docker-nginx-proxy
+=====================
 
-### Base Docker Image
+Base Docker Image
+---------------------
 
 [nginx:1.7.11](https://registry.hub.docker.com/_/nginx/)
 
-### 説明
+説明
+---------------------
 
 リバースプロキシサーバ として動作するコンテナです。
 
@@ -14,7 +17,8 @@
 [Docker Command Reference](https://docs.docker.com/reference/commandline/cli/)  
 [docker-genについて](https://github.com/jwilder/docker-gen)
 
-### 使用方法
+使用方法
+---------------------
 
 git pull後に
 
@@ -36,13 +40,15 @@ git pull後に
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com  ...
 
-### 利用可能なボリューム
+利用可能なボリューム
+---------------------
 
 以下のボリュームが利用可能
 
     /etc/nginx/certs    # nginx SSL認証ファイル
 
-### マルチポートについて
+マルチポートについて
+---------------------
 
 指定のコンテナが複数のポートを公開している場合、nginxプロキシは、ポート80番上で実行されているサービスにデフォルト設定されます。  
 
@@ -52,13 +58,15 @@ git pull後に
 
 指定のコンテナが1つだけのポートを公開し、環境変数`VIRTUAL_HOST`が設定されている場合は、そのポートが選択されます。
 
-### マルチホストについて
+マルチホストについて
+---------------------
 
 指定のコンテナが複数の仮想ホストをサポートする必要がある場合は、カンマ区切りで以下の様に指定できます。
 
-    $　docker run -e VIRTUAL_HOST=foo.bar.com,baz.bar.com,bar.com ...
+    $ docker run -e VIRTUAL_HOST=foo.bar.com,baz.bar.com,bar.com ...
 
-### ワイルドカードホストについて
+ワイルドカードホストについて
+---------------------
 
 `*.bar.com`か`foo.bar.*`のように、最初とホスト名の末尾にワイルドカードを使用できます。
 
@@ -67,13 +75,15 @@ git pull後に
 
 さらに詳細について知りたい場合は、nginxドキュメントの[`server_names`](http://nginx.org/en/docs/http/server_names.html)を参考にして下さい。
 
-### SSLバックエンド
+SSLバックエンド
+---------------------
 
 HTTPではなくHTTPSを使用してバックエンドに接続したい場合は、バックエンドのコンテナに`VIRTUAL_PROTO=https`を設定します。
 
     $ docker run -e VIRTUAL_PROTO=https
 
-### コンテナを分ける場合
+コンテナを分ける場合
+---------------------
 
 nginx-proxyコンテナは公式 [nginx](https://registry.hub.docker.com/_/nginx/) イメージと [jwilder/docker-gen](https://index.docker.io/u/jwilder/docker-gen/) イメージを使用して2つの別々のコンテナとして実行することができます。  
 コンテナを分けることにより、コンテナにバインド済みのDockerソケットをパブリックに公開されるのを防ぐことができます。  
@@ -94,7 +104,8 @@ nginx-proxyコンテナは公式 [nginx](https://registry.hub.docker.com/_/nginx
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com  ...
 
-### SSLサポート
+SSLサポート
+---------------------
 
 SSLは、ワイルドカードや証明書の命名規則、または環境変数としてCERT名(SNIのため)を指定したSNI証明書を使用して、単一のホストとしてサポートされます。
 
@@ -105,17 +116,20 @@ SSLを有効にするには以下の様に指定
 /path/to/certs の内容は、使用中の任意の仮想ホスト用の証明書と秘密鍵が含まれている必要があります。
 証明書と秘密鍵は、仮想ホストの中に.crtと.keyの拡張子を持ったファイル名であるべきです。
 
-### ワイルドカード証明書
+ワイルドカード証明書
+---------------------
 
 ワイルドカードの証明書と秘密鍵はドメイン名の後に.crtのと.keyの拡張子を持つ名前でなければなりません。  
 例: `VIRTUAL_HOST=foo.bar.com`の場合、`bar.com.crt`と`bar.com.key`とする。
 
-### SNI
+SNI
+---------------------
 
 もし証明書がマルチドメインをサポートしているなら、使用する証明書を識別するために環境変数`CERT_NAME=<name>`指定してコンテナを起動することができます。例えば、`*.foo.com`と`*.bar.com`をサポートしている証明書なら`shared.crt`と`shared.key`と名前を付けることができます。
 環境変数`VIRTUAL_HOST=foo.bar.com`と`CERT_NAME=shared`が指定され実行されているコンテナは、この共有証明書を使用します。
 
-### BASIC認証サポート
+BASIC認証サポート
+---------------------
 
 指定した環境変数`VIRTUAL_HOST`変数と同じ名前の `/etc/nginx/htpasswd/$VIRTUAL_HOST` ファイルを作成するとBASIC認証が有効になります。
 
@@ -123,11 +137,13 @@ SSLを有効にするには以下の様に指定
 
 詳しくは、[こちら](http://httpd.apache.org/docs/2.2/programs/htpasswd.html)を参考にして下さい。
 
-### Nginxのカスタム設定
+Nginxのカスタム設定
+---------------------
 
 環境変数で設定不可能なNginxの設定を行いたい場合は、プロキシ全体またはVIRTUAL_HOST毎にカスタム設定ファイルを指定することができます。
 
-#### プロキシ全体設定
+プロキシ全体設定
+---------------------
 
 プロキシ全体に設定を指定するには、`.conf`拡張子のを持つファイルを/etc/nginx/conf.dの下に追加します。
 
@@ -143,7 +159,8 @@ RUNコマンドでファイルを作成、または`conf.d`にファイルをコ
 
     $ docker run -d -p 80:80 -p 443:443 -v /path/to/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf:ro -v /var/run/docker.sock:/tmp/docker.sock tanaka0323/nginx-proxy
 
-#### VIRTUAL_HOST毎設定
+VIRTUAL_HOST毎設定
+---------------------
 
 VIRTUAL_HOST毎に設定するには、`/etc/nginx/vhost.d`の下に設定ファイルを追加します。ファイル名はVIRTUAL_HOST毎に指定されたVIRTUAL_HOST変数と同じ名前にして下さい。
 
@@ -160,13 +177,15 @@ VIRTUAL_HOST毎に設定するには、`/etc/nginx/vhost.d`の下に設定ファ
     $ { echo 'server_tokens off;'; echo 'client_max_body_size 100m;'; } > /path/to/vhost.d/www.example.com
     $ ln -s www.example.com /path/to/vhost.d/example.com
 
-### WebSockerサポート
+WebSockerサポート
+---------------------
 
 WebSockerコンテナをプロキシするには、以下のように環境変数`WEBSOCKETS=1`を設定します。
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com -e WEBSOCKETS=1  ...
 
-### License
+License
+---------------------
 
 The MIT License
 
