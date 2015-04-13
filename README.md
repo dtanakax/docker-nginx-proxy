@@ -45,7 +45,7 @@ git pull後に
 
 以下のボリュームが利用可能
 
-    /etc/nginx/certs    # nginx SSL認証ファイル
+    /etc/nginx/certs    # SSL証明書ディレクトリ
 
 マルチポートについて
 ---------------------
