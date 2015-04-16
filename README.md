@@ -6,7 +6,7 @@ docker-nginx-proxy
 Base Docker Image
 ---------------------
 
-[nginx:1.7.11](https://registry.hub.docker.com/_/nginx/)
+[tanaka0323/nginx](https://bitbucket.org/tanaka0323/docker-nginx)
 
 説明
 ---------------------

@@ -1,5 +1,5 @@
 # Set the base image
-FROM nginx:1.7.11
+FROM tanaka0323/nginx:latest
 
 # File Author / Maintainer
 MAINTAINER Daisuke Tanaka, tanaka@infocorpus.com
@@ -11,15 +11,13 @@ ENV DOCKER_GEN_OS linux
 ENV DOCKER_GEN_ARCH amd64
 ENV DOCKER_GEN_VERSION 0.3.9
 
-# Install wget and install/updates certificates
 RUN apt-get update && \
-    apt-get install -y -q --no-install-recommends ca-certificates wget && \
-    apt-get clean && \
-    rm -r /var/lib/apt/lists/*
+    apt-get remove -y supervisor && \
+    rm -rf /var/lib/apt/lists/*
+RUN apt-get clean all
 
 # Configure Nginx and apply fix for very long server names
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf && \
-    sed -i 's/^http {/&\n    server_names_hash_bucket_size 128;/g' /etc/nginx/nginx.conf
+RUN sed -i 's/^http {/&\n    server_names_hash_bucket_size 128;/g' /etc/nginx/nginx.conf
 
 # Install Forego
 RUN wget -P /usr/local/bin https://godist.herokuapp.com/projects/ddollar/forego/releases/current/linux-amd64/forego && \
