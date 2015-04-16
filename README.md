@@ -1,4 +1,4 @@
-![nginx 1.7.11](https://img.shields.io/badge/nginx-1.7.11-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+![nginx 1.7.12](https://img.shields.io/badge/nginx-1.7.12-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 docker-nginx-proxy
 =====================
