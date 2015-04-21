@@ -11,7 +11,7 @@ Base Docker Image
 説明
 ---------------------
 
-リバースプロキシサーバ として動作するコンテナです。
+リバースプロキシサーバ として動作するコンテナ作成設定
 
 [Dockerについて](https://docs.docker.com/)  
 [Docker Command Reference](https://docs.docker.com/reference/commandline/cli/)  
