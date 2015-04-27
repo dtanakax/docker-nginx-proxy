@@ -184,6 +184,17 @@ WebSockerコンテナをプロキシするには、以下のように環境変�
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com -e WEBSOCKETS=1  ...
 
+Docker Swarmとの連携ついて
+---------------------
+
+DockerSocketのマウントを外し
+
+    -v /var/run/docker.sock:/tmp/docker.sock
+
+環境変数`DOCKER_HOST`にSwarm ManagerのIPを指定します。
+
+    -e DOCKER_HOST=tcp://<swarm-manager-ip>:<swarm-manager-port>
+
 License
 ---------------------
 
