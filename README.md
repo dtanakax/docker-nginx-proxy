@@ -184,6 +184,13 @@ WebSockerコンテナをプロキシするには、以下のように環境変�
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com -e WEBSOCKETS=1  ...
 
+IPフィルタリング
+---------------------
+
+環境変数`IP_FILTER`へ`allow deny`を記述します。
+
+    $ docker run -e IP_FILTER="allow 172.17.8.0/24; deny all;" ...
+
 Docker Swarmとの連携ついて
 ---------------------
 
