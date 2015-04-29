@@ -78,8 +78,8 @@ upstream {{ $host }} {
 {{/* Get the ALLOW_IPADDR defined by containers w/ the same vhost, falling back to "all" */}}
 {{ $allow := or (first (groupByKeys $containers "Env.ALLOW")) "all" }}
 
-{{/* Get the DENY_IPADDR defined by containers w/ the same vhost, falling back to "none" */}}
-{{ $deny := or (first (groupByKeys $containers "Env.DENY")) "none" }}
+{{/* Get the DENY_IPADDR defined by containers w/ the same vhost, falling back to "all" */}}
+{{ $deny := or (first (groupByKeys $containers "Env.DENY")) "all" }}
 
 {{/* Get the VIRTUAL_PROTO defined by containers w/ the same vhost, falling back to "http" */}}
 {{ $proto := or (first (groupByKeys $containers "Env.VIRTUAL_PROTO")) "http" }}
@@ -108,15 +108,13 @@ server {
 	server_name {{ $host }};
 
 	{{ if eq $allow "all" }}
-		{{ if ne $deny "none" }}
+		{{ if ne $deny "all" }}
 	deny {{ $deny }};
-		{{ end }}
 	allow {{ $allow }};
+		{{ end }}
 	{{ else }}
 	allow {{ $allow }};
-		{{ if ne $deny "none" }}
 	deny {{ $deny }};
-		{{ end }}
 	{{ end }}
 
 	listen 443 ssl;
@@ -151,15 +149,13 @@ server {
 	server_name {{ $host }};
 
 	{{ if eq $allow "all" }}
-		{{ if ne $deny "none" }}
+		{{ if ne $deny "all" }}
 	deny {{ $deny }};
-		{{ end }}
 	allow {{ $allow }};
+		{{ end }}
 	{{ else }}
 	allow {{ $allow }};
-		{{ if ne $deny "none" }}
 	deny {{ $deny }};
-		{{ end }}
 	{{ end }}
 
 	{{ if (exists (printf "/etc/nginx/vhost.d/%s" $host)) }}
