@@ -16,14 +16,6 @@ Base Docker Image
 使用方法
 ---------------------
 
-git pull後に
-
-    $ cd docker-nginx-proxy
-
-イメージ作成
-
-    $ docker build -t dtanakax/nginx-proxy .
-
 起動  
 
     $ docker run --name <name> -d \
