@@ -6,7 +6,7 @@ docker-nginx-proxy
 Base Docker Image
 ---------------------
 
-[dtanakax/nginx](https://registry.hub.docker.com/u/dtanakax/nginx/)
+[dtanakax/nginx:latest](https://registry.hub.docker.com/u/dtanakax/nginx/)
 
 説明
 ---------------------
