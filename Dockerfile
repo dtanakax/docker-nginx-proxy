@@ -1,8 +1,8 @@
 # Set the base image
-FROM tanaka0323/nginx:latest
+FROM dtanakax/nginx:latest
 
 # File Author / Maintainer
-MAINTAINER Daisuke Tanaka, tanaka@infocorpus.com
+MAINTAINER Daisuke Tanaka, dtanakax@gmail.com
 
 # Environment Variable of Dockergen
 # DOCKER_GEN_OS linux darwin
@@ -10,11 +10,6 @@ MAINTAINER Daisuke Tanaka, tanaka@infocorpus.com
 ENV DOCKER_GEN_OS linux
 ENV DOCKER_GEN_ARCH amd64
 ENV DOCKER_GEN_VERSION 0.3.9
-
-RUN apt-get update && \
-    apt-get remove -y supervisor && \
-    rm -rf /var/lib/apt/lists/*
-RUN apt-get clean all
 
 # Configure Nginx and apply fix for very long server names
 RUN sed -i 's/^http {/&\n    server_names_hash_bucket_size 128;/g' /etc/nginx/nginx.conf
