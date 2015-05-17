@@ -24,7 +24,7 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
  && rm /docker-gen-$DOCKER_GEN_OS-$DOCKER_GEN_ARCH-$DOCKER_GEN_VERSION.tar.gz
 
 ENV DOCKER_HOST unix:///tmp/docker.sock
-ENV TLSVERIFY false
+ENV DOCKER_TLS_VERIFY false
 
 COPY nginx.tmpl ./app/
 COPY Procfile ./
