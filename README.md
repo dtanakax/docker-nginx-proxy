@@ -179,16 +179,28 @@ IPフィルタリング
 
     $ docker run -e IP_FILTER="allow 172.17.8.0/24; deny all;" ...
 
-Docker Swarmとの連携ついて
+Docker Swarm Remote APIへの接続
 ---------------------
 
-DockerSocketのマウントを外し
+DockerSocketのマウントを外し、環境変数`DOCKER_HOST`にSwarm ManagerのIPを指定します。
 
     -v /var/run/docker.sock:/tmp/docker.sock
 
-環境変数`DOCKER_HOST`にSwarm ManagerのIPを指定します。
-
     -e DOCKER_HOST=tcp://<swarm-manager-ip>:<swarm-manager-port>
+
+TLS接続の場合
+
+環境変数`TLSVERIFY`を`true`に、そしてホストOSへTLS接続のためのクライアント証明書＆鍵を`ca.pem, cert.pem, key.pem`というファイル名で任意の場所へ設置し、以下の様に`/certs`ディレクトリにマウントして下さい。
+
+    docker run  \
+            -p "80:80" \
+            -p "443:443" \
+            -e DOCKER_HOST=tcp://<swarm-manager-ip>:<swarm-manager-port> \
+            -e TLSVERIFY=true \
+            -v /mnt/certs:/etc/nginx/certs:ro \
+            -v /mnt/htpasswd:/etc/nginx/htpasswd:ro \
+            -v /mnt/swarm/certs:/certs:ro \
+        dtanakax/nginx-proxy:latest
 
 License
 ---------------------

@@ -24,12 +24,17 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
  && rm /docker-gen-$DOCKER_GEN_OS-$DOCKER_GEN_ARCH-$DOCKER_GEN_VERSION.tar.gz
 
 ENV DOCKER_HOST unix:///tmp/docker.sock
+ENV TLSVERIFY false
 
-COPY . /app/
-WORKDIR /app/
+COPY nginx.tmpl ./app/
+COPY Procfile ./
+COPY start.sh ./
+RUN chmod +x ./start.sh
+
+ENTRYPOINT ["./start.sh"]
 
 # Define mountable directories.
-VOLUME ["/etc/nginx/certs"]
+VOLUME ["/etc/nginx/certs", "/etc/nginx/htpasswd", "/certs"]
 
 # Executing forego
 CMD ["forego", "start", "-r"]
