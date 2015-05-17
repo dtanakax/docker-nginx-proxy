@@ -190,13 +190,13 @@ DockerSocketのマウントを外し、環境変数`DOCKER_HOST`にSwarm Manager
 
 TLS接続の場合
 
-環境変数`TLSVERIFY`を`true`に、そしてホストOSへTLS接続のためのクライアント証明書＆鍵を`ca.pem, cert.pem, key.pem`というファイル名で任意の場所へ設置し、以下の様に`/certs`ディレクトリにマウントして下さい。
+環境変数`DOCKER_TLS_VERIFY`を`true`に、そしてホストOSへTLS接続のためのクライアント証明書＆鍵を`ca.pem, cert.pem, key.pem`というファイル名で任意の場所へ設置し、以下の様に`/certs`ディレクトリにマウントして下さい。
 
     docker run  \
             -p "80:80" \
             -p "443:443" \
             -e DOCKER_HOST=tcp://<swarm-manager-ip>:<swarm-manager-port> \
-            -e TLSVERIFY=true \
+            -e DOCKER_TLS_VERIFY=true \
             -v /mnt/certs:/etc/nginx/certs:ro \
             -v /mnt/htpasswd:/etc/nginx/htpasswd:ro \
             -v /mnt/swarm/certs:/certs:ro \
