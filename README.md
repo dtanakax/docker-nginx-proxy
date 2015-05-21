@@ -179,6 +179,22 @@ IPフィルタリング
 
     $ docker run -e IP_FILTER="allow 172.17.8.0/24; deny all;" ...
 
+
+Proxy Buffering
+---------------------
+
+参考URL [http://wiki.nginx.org/HttpProxyModuleJa#proxy_buffering](http://wiki.nginx.org/HttpProxyModuleJa#proxy_buffering)
+
+環境変数`PROXY_BUFFERING`へ`on` or `off`で指定します。default: `on`
+
+Proxy Redirect
+---------------------
+
+参考URL [http://wiki.nginx.org/HttpProxyModuleJa#proxy_redirect](http://wiki.nginx.org/HttpProxyModuleJa#proxy_redirect)
+
+環境変数`PROXY_REDIRECT`へ`on` or `off`で指定します。default: `off`  
+リダイレクト先のポートは`80`番もしくは環境変数`VIRTUAL_PORT`で指定されたポートへリダイレクトされます。
+
 Docker Swarm Remote APIへの接続
 ---------------------
 

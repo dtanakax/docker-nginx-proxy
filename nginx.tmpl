@@ -75,6 +75,15 @@ upstream {{ $host }} {
 {{ end }}
 }
 
+{{/* Get the VIRTUAL_PORT for PROXY_REDIRECT defined by containers w/ the same vhost */}}
+{{ $vport := or (first (groupByKeys $containers "Env.VIRTUAL_PORT")) "80" }}
+
+{{/* Get the PROXY_REDIRECT defined by containers w/ the same vhost, falling back to "off" */}}
+{{ $redirect := or (first (groupByKeys $containers "Env.PROXY_REDIRECT")) "off" }}
+
+{{/* Get the PROXY_BUFFERING defined by containers w/ the same vhost, falling back to "on" */}}
+{{ $buffering := or (first (groupByKeys $containers "Env.PROXY_BUFFERING")) "on" }}
+
 {{/* Get the IP_FILTER defined by containers w/ the same vhost, falling back to "none" */}}
 {{ $ipfilter := or (first (groupByKeys $containers "Env.IP_FILTER")) "none" }}
 
@@ -128,6 +137,10 @@ server {
 
 	location / {
 		proxy_pass {{ $proto }}://{{ $host }};
+		{{ if eq $redirect "on" }}
+			proxy_redirect {{ $proto }}://{{ $host }}:{{ $vport }}/ /;
+		{{ end }}
+		proxy_buffering {{ $buffering }};
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
@@ -149,6 +162,10 @@ server {
 
 	location / {
 		proxy_pass {{ $proto }}://{{ $host }};
+		{{ if eq $redirect "on" }}
+			proxy_redirect {{ $proto }}://{{ $host }}:{{ $vport }}/ /;
+		{{ end }}
+		proxy_buffering {{ $buffering }};
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
